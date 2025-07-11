@@ -1,0 +1,120 @@
+<p-toast></p-toast>
+<div class="tabela-container">
+  <p-table [value]="agendamentos">
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Nome Completo</th>
+        <th>Data de Nascimento</th>
+        <th>Numero de telefone</th>
+        <th>Bairro</th>
+        <th>Rua</th>
+        <th>Número da Casa</th>
+        <th>Dia da Consulta</th>
+        <th>Horário da Consulta</th>
+
+      </tr>
+    </ng-template>
+
+
+    <ng-template pTemplate="body" let-agendamento let-i="rowIndex">
+      <tr>
+        <td>{{ agendamento.nome }}</td>
+        <td>{{ agendamento.dataNascimento }}</td>
+        <td>{{ agendamento.numeroTelefone }}</td>
+        <td>{{ agendamento.bairro }}</td>
+        <td>{{ agendamento.rua }}</td>
+        <td>{{ agendamento.numero }}</td>
+        <td>{{ agendamento.dia }}</td>
+        <td>{{ agendamento.hora }}</td>
+        <td>
+          <button pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text p-button-info" (click)="showDialog(i)" title="Editar"></button>
+          <button pButton type="button" icon="pi pi-times" class="p-button-rounded p-button-text p-button-danger" (click)="removerAgendamento(i)" title="Remover"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+
+  <p-dialog
+    header="Editar Paciente"
+    [(visible)]="visible"
+    [modal]="true"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+    [style]="{ width: '50vw' }"
+    [draggable]="false"
+    [resizable]="false"
+  >
+    <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" id="formulario">
+      <div id="grupo-de-input">
+        <label for="nome"><strong>Nome Completo</strong></label>
+        <input type="text" id="nome" placeholder="Nome" pInputText formControlName="nome" />
+
+        <label for="dataNascimento"><strong>Data de nascimento</strong></label>
+        <p-inputMask
+          formControlName="dataNascimento"
+          id="dataNascimento"
+          placeholder="dd/mm/aaaa"
+          mask="99/99/9999"
+        ></p-inputMask>
+
+        <label for="numeroTelefone"><strong>Número de telefone</strong></label>
+        <p-inputMask 
+          id="numeroTelefone"
+          mask="99-999999999" 
+          formControlName="numeroTelefone" 
+          placeholder="(99)-999999999"
+        ></p-inputMask>
+
+        <label for="bairro"><strong>Bairro</strong></label>
+        <input type="text" id="bairro" placeholder="Bairro" pInputText formControlName="bairro" />
+
+        <label for="rua"><strong>Rua</strong></label>
+        <input type="text" id="rua" placeholder="Rua" pInputText formControlName="rua" />
+
+        <label for="numero"><strong>Número da casa</strong></label>
+        <input type="text" id="numero" placeholder="Número da casa" pInputText formControlName="numero" />
+
+        <label for="dia"><strong>Dia da consulta</strong></label>
+        <p-dropdown
+          id="dia"
+          formControlName="dia"
+          [options]="dias"
+          placeholder="Selecione o dia"
+        ></p-dropdown>
+
+        <label for="hora"><strong>Horário da consulta</strong></label>
+        <p-dropdown
+          id="hora"
+          formControlName="hora"
+          [options]="horarios"
+          placeholder="Selecione o horário"
+          [optionDisabled]="'disabled'"
+        ></p-dropdown>
+
+        <div style="margin-top: 20px; display: flex; gap: 10px;">
+          <button pButton type="submit" label="Salvar" class="p-button-success"></button>
+          <button pButton type="button" label="Cancelar" class="p-button-secondary" (click)="visible=false"></button>
+        </div>
+      </div>
+    </form>
+  </p-dialog>
+
+
+  <button id="voltar"
+    style="
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #007ad9;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    "
+    (click)="voltar()"
+  >
+    Voltar
+  </button>
+</div>

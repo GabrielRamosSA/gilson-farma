@@ -1,0 +1,60 @@
+
+
+<nav class="navbar">
+  <div id="texto">
+  <h1>Farma Gilson</h1>
+  <input type="text" placeholder="Buscar remédio...">
+  </div>
+ <div id="botoes">
+  <div class="carrinho" (click)="voltar()">
+     Voltar
+  </div>
+   <div class="carrinho" (click)="abrirCarrinho()">
+    🛒 Carrinho (<span>{{ contadorCarrinho }}</span>)
+  </div>
+ </div> 
+</nav>
+
+<div class="modal" *ngIf="modalAberto">
+  <div class="modal-content">
+    <h3>🛒 Itens no Carrinho</h3>
+    <ul>
+      <li *ngFor="let item of carrinho; let i = index">
+        {{ item.nome }} (x{{ item.quantidade }})
+        <button class="btn" (click)="removerDoCarrinho(i)">Remover</button>
+      </li>
+    </ul>
+    <div style="display: flex; ">
+     <button class="btn" style="margin-right: 190px;" (click)="fecharCarrinho()">Fechar</button>
+     <button class="btn" >Comprar</button>
+    </div>
+  </div>
+</div>
+
+<header>
+  <h1>Farma Gilson</h1>
+  <p>Confira nossos remédios em estoque</p>
+</header>
+
+<section class="destaque">
+  <h2>🔥 Promoções da Semana</h2>
+  <p>Descontos incríveis em medicamentos selecionados, também fazemos entrega. Aproveite!</p>
+</section>
+
+<div class="container">
+  <div class="card" *ngFor="let prod of produtos">
+    <img [src]="prod.imagem" [alt]="prod.nome">
+    <h3>{{ prod.nome }}</h3>
+    <p>{{ prod.descricao }}</p>
+    <div class="price">{{ prod.preco }}</div>
+    <p>Quantidade disponível: {{ prod.quantidade }}</p>
+    <div class="botoes">
+      <button class="btn" (click)="adicionarAoCarrinho(prod.nome)">Adicionar ao Carrinho</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 Farmácia Online. Todos os direitos reservados.</p>
+  <p>Contato: contato&#64;farmaciaonline.com | (11) 99999-9999</p>
+</footer>

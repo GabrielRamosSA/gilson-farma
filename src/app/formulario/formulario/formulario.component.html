@@ -1,0 +1,91 @@
+<p-button icon="pi pi-user" [rounded]="true" severity="info" [outlined]="true" routerLink="/login" (click)="login()" />
+
+<div id="container-pai">
+    <div id="container">
+    
+        <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" id="formulario">
+            <div id="grupo-de-input">
+
+         
+                <label for="nome"><strong>Nome Completo</strong></label>
+                <input type="text" id="nome" placeholder="Nome" pInputText formControlName="nome" />
+
+            
+                <label for="dataNascimento"><strong>Data de nascimento</strong></label>
+                <p-inputMask
+                    formControlName="dataNascimento"
+                    id="dataNascimento"
+                    placeholder="dd/mm/aaaa"
+                    mask="99/99/9999"
+                    showIcon="true"
+                    dateFormat="dd/mm/yy"
+                ></p-inputMask>
+
+                <label for="numeroTelefone"><strong>Número de telefone</strong></label>
+                <p-inputMask 
+                    id="numeroTelefone"
+                    mask="99-999999999" 
+                    formControlName="numeroTelefone" 
+                    placeholder="(99)-999999999"
+                ></p-inputMask>
+
+                <label for="bairro"><strong>Bairro</strong></label>
+                <input type="text" id="bairro" placeholder="Bairro" pInputText formControlName="bairro" />
+
+        
+                <label for="rua"><strong>Rua</strong></label>
+                <input type="text" id="rua" placeholder="Rua" pInputText formControlName="rua" />
+  
+                <label for="numeroCasa"><strong>Número da casa</strong></label>
+                <input type="text" id="numero" placeholder="Número da casa" pInputText formControlName="numero" />
+        
+                <label for="selecionarDias"><strong>Dia da consulta</strong></label>
+                <p-dropdown 
+                    id="selecionarDias"
+                    formControlName="selecionarDias" 
+                    [options]="dias"
+                    optionLabel="dia"
+                    placeholder="Dia"
+                ></p-dropdown>
+
+                <label for="selecionarHorarios"><strong>Horário da consulta</strong></label>
+                <p-dropdown 
+                    id="selecionarHorarios"
+                    formControlName="selecionarHorarios" 
+                    [options]="horarios"
+                    optionLabel="hora"
+                    placeholder="Horário"
+                ></p-dropdown>
+
+                <p-toast [breakpoints]="{ '920px': { width: '100%', right: '0', left: '0' } }"></p-toast>
+
+    
+                <div id="botao">
+
+                    <p-button 
+                        type="submit" 
+                        mat-flat-button 
+                        color="primary"
+                        label="Agendar consulta"
+                    ></p-button>
+
+            
+                    <p-button 
+                        mat-flat-button 
+                        color="primary" 
+                        routerLink="/tabela" 
+                        (click)="tabela()"
+                        label="Tabela de consulta"
+                    ></p-button>
+                    <p-button
+                    mat-flat-button 
+                        color="primary" 
+                        routerLink="/medicamento" 
+                        (click)="medicamentos()"
+                        label="Medicamentos">
+                    </p-button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

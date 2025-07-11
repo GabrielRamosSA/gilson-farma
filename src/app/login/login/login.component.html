@@ -1,0 +1,18 @@
+<p-toast></p-toast>
+<div id="container-pai">
+  <div id="container">
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" id="formulario">
+      <div id="grupo-de-input">
+        <label for="usuario"><strong>Usuário</strong></label>
+        <input type="text" id="usuario" placeholder="Usuário" pInputText formControlName="usuario" />
+
+        <label for="senha"><strong>Senha</strong></label>
+        <input type="password" id="senha" placeholder="Senha" pInputText formControlName="senha" />
+
+        <div id="botao" style="margin-top: 20px;">
+          <button pButton type="submit" label="Entrar"></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
