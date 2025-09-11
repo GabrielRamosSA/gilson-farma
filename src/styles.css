@@ -2,6 +2,13 @@
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
 @import "primeicons/primeicons.css";
+@import 'ngx-toastr/toastr';
+
+/* Ou se der erro, tente: */
+/* @import '~ngx-toastr/toastr.css'; */
+
+/* Seus outros estilos globais aqui... */
+
 html, body { height: 100%; }
 body { margin: 0;   font-family: Arial, sans-serif; 
     background-color: rgb(233, 231, 231);
