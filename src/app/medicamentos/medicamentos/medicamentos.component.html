@@ -110,27 +110,45 @@
   <div class="container">
     <h2>Categorias</h2>
     <div class="grade-categoria">
-      <div class="item-categoria">
+      <div class="item-categoria" 
+           [class.ativo]="categoriaAtiva === 'Todos'" 
+           (click)="filtrarPorCategoria('Todos')">
+        <i class="fas fa-th-large"></i>
+        <span>Todos</span>
+      </div>
+      <div class="item-categoria" 
+           [class.ativo]="categoriaAtiva === 'Medicamentos'" 
+           (click)="filtrarPorCategoria('Medicamentos')">
         <i class="fas fa-pills"></i>
         <span>Medicamentos</span>
       </div>
-      <div class="item-categoria">
+      <div class="item-categoria" 
+           [class.ativo]="categoriaAtiva === 'Vitaminas'" 
+           (click)="filtrarPorCategoria('Vitaminas')">
         <i class="fas fa-heart"></i>
         <span>Vitaminas</span>
       </div>
-      <div class="item-categoria">
+      <div class="item-categoria" 
+           [class.ativo]="categoriaAtiva === 'Infantil'" 
+           (click)="filtrarPorCategoria('Infantil')">
         <i class="fas fa-baby"></i>
         <span>Infantil</span>
       </div>
-      <div class="item-categoria">
+      <div class="item-categoria" 
+           [class.ativo]="categoriaAtiva === 'Higiene'" 
+           (click)="filtrarPorCategoria('Higiene')">
         <i class="fas fa-soap"></i>
         <span>Higiene</span>
       </div>
-      <div class="item-categoria">
+      <div class="item-categoria" 
+           [class.ativo]="categoriaAtiva === 'Cosméticos'" 
+           (click)="filtrarPorCategoria('Cosméticos')">
         <i class="fas fa-eye"></i>
         <span>Cosméticos</span>
       </div>
-      <div class="item-categoria">
+      <div class="item-categoria" 
+           [class.ativo]="categoriaAtiva === 'Bucal'" 
+           (click)="filtrarPorCategoria('Bucal')">
         <i class="fas fa-tooth"></i>
         <span>Bucal</span>
       </div>
@@ -157,16 +175,21 @@
   </div>
 </section>
 
-<section class="secao-produtos">
+<section class="secao-produtos" id="secao-produtos">
   <div class="container">
     <div class="cabecalho-secao">
-      <div class="resultados-busca" *ngIf="termoPesquisa.length > 0">
-        <h2>Resultados para "{{ termoPesquisa }}" ({{ produtosFiltrados.length }} encontrados)</h2>
-        <button class="limpar-todos-filtros" (click)="limparPesquisa(); filtrarProdutos('Todos')">
-          <i class="fas fa-times"></i> Limpar busca
+      <div class="resultados-busca" *ngIf="termoPesquisa.length > 0 || categoriaAtiva !== 'Todos'">
+        <h2 *ngIf="termoPesquisa.length > 0">
+          Resultados para "{{ termoPesquisa }}" ({{ produtosFiltrados.length }} encontrados)
+        </h2>
+        <h2 *ngIf="termoPesquisa.length === 0 && categoriaAtiva !== 'Todos'">
+          {{ categoriaAtiva }} ({{ produtosFiltrados.length }} produtos)
+        </h2>
+        <button class="botao-filtro" style="margin-bottom: 30px;" (click)="limparTodosFiltros()">
+          <i class="fas fa-times"></i> Limpar filtros
         </button>
       </div>
-      <h2 *ngIf="termoPesquisa.length === 0">Nossos Medicamentos</h2>
+      <h2 *ngIf="termoPesquisa.length === 0 && categoriaAtiva === 'Todos'">Nossos Medicamentos</h2>
       
       <div class="opcoes-filtro">
         <button 

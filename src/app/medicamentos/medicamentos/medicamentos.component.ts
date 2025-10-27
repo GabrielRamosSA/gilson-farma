@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
 import { FormsModule } from '@angular/forms';
@@ -12,17 +13,21 @@ import { ToastrService } from 'ngx-toastr';
   imports: [CommonModule, FormsModule] 
 })
 export class MedicamentosComponent {
+  
   carrinho: { nome: string, quantidade: number }[] = [];
+  
   modalAberto = false;
   filtroAtivo = 'Todos';
   termoPesquisa = '';
+  categoriaAtiva = 'Todos';
   
   constructor(private router: Router, private toastr: ToastrService) {}
 
   produtos = [
+    // ====== MEDICAMENTOS ======
     {
       nome: "Paracetamol 500mg",
-      imagem: "/Paracetamol.png",
+      imagem: "/medicamentos/Paracetamol.png",
       descricao: "Analgésico e antitérmico para dores e febres.",
       preco: "R$ 9,90",
       precoAntigo: "R$ 12,90",
@@ -30,35 +35,38 @@ export class MedicamentosComponent {
       promocao: true,
       desconto: 23,
       tipo: "Genéricos",
+      categoria: "Medicamentos",
       palavrasChave: ["paracetamol", "analgesico", "dor", "febre", "acetaminofeno"]
     },
     {
       nome: "Dipirona Sódica 1g",
-      imagem: "/DipironaSodica.png",
+      imagem: "/medicamentos/DipironaSodica.png",
       descricao: "Analgésico e antipirético para alívio de dor e febre.",
       preco: "R$ 7,50",
-      precoAntigo: "",
+      precoAntigo: "", 
       quantidade: 40,
       promocao: false,
       desconto: 0,
       tipo: "Genéricos",
+      categoria: "Medicamentos",
       palavrasChave: ["dipirona", "analgesico", "dor", "febre", "metamizol"]
     },
     {
       nome: "Ibuprofeno 600mg",
-      imagem: "/Ibuprofeno.png",
+      imagem: "/medicamentos/Ibuprofeno.png",
       descricao: "Anti-inflamatório, analgésico e antitérmico.",
       preco: "R$ 14,90",
       precoAntigo: "R$ 18,90",
       quantidade: 30,
       promocao: true,
       desconto: 21,
-      tipo: "Referência",
+      tipo: "Referência", 
+      categoria: "Medicamentos",
       palavrasChave: ["ibuprofeno", "anti-inflamatorio", "dor", "inflamacao", "artrite"]
     },
     {
       nome: "Amoxicilina 500mg",
-      imagem: "/Amoxicilina.png",
+      imagem: "/medicamentos/Amoxicilina.png",
       descricao: "Antibiótico para infecções bacterianas.",
       preco: "R$ 19,90",
       precoAntigo: "",
@@ -66,11 +74,12 @@ export class MedicamentosComponent {
       promocao: false,
       desconto: 0,
       tipo: "Similares",
+      categoria: "Medicamentos",
       palavrasChave: ["amoxicilina", "antibiotico", "infeccao", "bacteria", "penicilina"]
     },
     {
       nome: "Azitromicina 500mg",
-      imagem: "/Azitromicina.png",
+      imagem: "/medicamentos/Azitromicina.png",
       descricao: "Antibiótico de amplo espectro.",
       preco: "R$ 22,50",
       precoAntigo: "R$ 29,90",
@@ -78,11 +87,12 @@ export class MedicamentosComponent {
       promocao: true,
       desconto: 25,
       tipo: "Referência",
+      categoria: "Medicamentos",
       palavrasChave: ["azitromicina", "antibiotico", "infeccao", "respiratoria", "zitromax"]
     },
     {
       nome: "Losartana Potássica 50mg",
-      imagem: "/LosartanaPotassica.png",
+      imagem: "/medicamentos/LosartanaPotassica.png",
       descricao: "Antihipertensivo para controle da pressão arterial.",
       preco: "R$ 18,90",
       precoAntigo: "",
@@ -90,11 +100,12 @@ export class MedicamentosComponent {
       promocao: false,
       desconto: 0,
       tipo: "Genéricos",
+      categoria: "Medicamentos",
       palavrasChave: ["losartana", "pressao", "hipertensao", "cardiovascular", "coração"]
     },
     {
       nome: "Omeprazol 20mg",
-      imagem: "/Omeprazol.png",
+      imagem: "/medicamentos/Omeprazol.png",
       descricao: "Inibidor de bomba de prótons para problemas gástricos.",
       preco: "R$ 12,90",
       precoAntigo: "R$ 16,90",
@@ -102,11 +113,12 @@ export class MedicamentosComponent {
       promocao: true,
       desconto: 24,
       tipo: "Similares",
+      categoria: "Medicamentos",
       palavrasChave: ["omeprazol", "gastrite", "azia", "estomago", "refluxo"]
     },
     {
       nome: "Cetirizina 10mg",
-      imagem: "/Cetirizina.png",
+      imagem: "/medicamentos/Cetirizina.png",
       descricao: "Antialérgico para alívio de sintomas alérgicos.",
       preco: "R$ 8,90",
       precoAntigo: "",
@@ -114,11 +126,12 @@ export class MedicamentosComponent {
       promocao: false,
       desconto: 0,
       tipo: "Genéricos",
+      categoria: "Medicamentos",
       palavrasChave: ["cetirizina", "alergia", "antialergico", "rinite", "urticaria"]
     },
     {
       nome: "Cloridrato de Sertralina 50mg",
-      imagem: "/CloridratodeSertralina.png",
+      imagem: "/medicamentos/CloridratodeSertralina.png",
       descricao: "Antidepressivo ISRS para tratamento de depressão e ansiedade.",
       preco: "R$ 29,90",
       precoAntigo: "",
@@ -126,11 +139,12 @@ export class MedicamentosComponent {
       promocao: false,
       desconto: 0,
       tipo: "Referência",
+      categoria: "Medicamentos",
       palavrasChave: ["sertralina", "antidepressivo", "depressao", "ansiedade", "zoloft"]
     },
     {
       nome: "Fluoxetina 20mg",
-      imagem: "/Fluoxetina.png",
+      imagem: "/medicamentos/Fluoxetina.png",
       descricao: "Antidepressivo ISRS para tratamento de depressão, transtorno de ansiedade, bulimia e TOC.",
       preco: "R$ 24,90",
       precoAntigo: "R$ 32,90",
@@ -138,35 +152,12 @@ export class MedicamentosComponent {
       promocao: true,
       desconto: 24,
       tipo: "Similares",
+      categoria: "Medicamentos",
       palavrasChave: ["fluoxetina", "antidepressivo", "depressao", "ansiedade", "prozac"]
     },
     {
-      nome: "Sinvastatina 20mg",
-      imagem: "/Sinvastatina.png",
-      descricao: "Estatina para redução do colesterol LDL.",
-      preco: "R$ 16,90",
-      precoAntigo: "",
-      quantidade: 27,
-      promocao: false,
-      desconto: 0,
-      tipo: "Genéricos",
-      palavrasChave: ["sinvastatina", "colesterol", "estatina", "triglicerides", "cardiovascular"]
-    },
-    {
-      nome: "Enalapril 10mg",
-      imagem: "/Enalapril.png",
-      descricao: "Inibidor da ECA para tratamento de hipertensão arterial.",
-      preco: "R$ 15,90",
-      precoAntigo: "",
-      quantidade: 17,
-      promocao: false,
-      desconto: 0,
-      tipo: "Similares",
-      palavrasChave: ["enalapril", "pressao", "hipertensao", "cardiovascular", "ace"]
-    },
-    {
       nome: "Metformina 850mg",
-      imagem: "/Metformina.png",
+      imagem: "/medicamentos/Metformina.png",
       descricao: "Antidiabético oral para controle de diabetes tipo 2.",
       preco: "R$ 20,90",
       precoAntigo: "R$ 26,90",
@@ -174,23 +165,25 @@ export class MedicamentosComponent {
       promocao: true,
       desconto: 22,
       tipo: "Referência",
+      categoria: "Medicamentos",
       palavrasChave: ["metformina", "diabetes", "glicose", "acucar", "diabetico"]
     },
     {
-      nome: "Gliclazida 30mg",
-      imagem: "/Gliclazida.png",
-      descricao: "Antidiabético oral para controle de diabetes tipo 2.",
-      preco: "R$ 21,90",
+      nome: "Enalapril 10mg",
+      imagem: "/medicamentos/Enalapril.png",
+      descricao: "Inibidor da ECA para tratamento de hipertensão arterial.",
+      preco: "R$ 15,90",
       precoAntigo: "",
-      quantidade: 21,
+      quantidade: 17,
       promocao: false,
       desconto: 0,
       tipo: "Similares",
-      palavrasChave: ["gliclazida", "diabetes", "glicose", "acucar", "diabetico"]
+      categoria: "Medicamentos",
+      palavrasChave: ["enalapril", "pressao", "hipertensao", "cardiovascular", "ace"]
     },
     {
       nome: "Captopril 25mg",
-      imagem: "/Captopril.png",
+      imagem: "/medicamentos/Captopril.png",
       descricao: "Inibidor da ECA para tratamento de hipertensão arterial.",
       preco: "R$ 13,90",
       precoAntigo: "",
@@ -198,67 +191,345 @@ export class MedicamentosComponent {
       promocao: false,
       desconto: 0,
       tipo: "Genéricos",
+      categoria: "Medicamentos",
       palavrasChave: ["captopril", "pressao", "hipertensao", "cardiovascular", "ace"]
     },
+
+    // ========== VITAMINAS ==========
     {
-      nome: "Ranitidina 150mg",
-      imagem: "/Ranitidina.png",
-      descricao: "Antagonista H2 para redução da acidez gástrica.",
-      preco: "R$ 11,90",
-      precoAntigo: "",
-      quantidade: 24,
-      promocao: false,
-      desconto: 0,
-      tipo: "Similares",
-      palavrasChave: ["ranitidina", "gastrite", "azia", "estomago", "acido"]
+      nome: "Vitamina D3 2000UI",
+      imagem: "/vitaminas/VitaminaD3.png",
+      descricao: "Suplemento vitamínico para fortalecimento ósseo e imunidade.",
+      preco: "R$ 35,90",
+      precoAntigo: "R$ 42,90",
+      quantidade: 45,
+      promocao: true,
+      desconto: 16,
+      tipo: "Suplementos", 
+      categoria: "Vitaminas",
+      palavrasChave: ["vitamina d", "ossos", "calcio", "imunidade", "suplemento"]
     },
     {
-      nome: "Lorazepam 2mg",
-      imagem: "/Lorazepam.png",
-      descricao: "Benzodiazepínico para tratamento de ansiedade e insônia.",
-      preco: "R$ 17,90",
-      precoAntigo: "R$ 23,90",
-      quantidade: 4,
+      nome: "Complexo B",
+      imagem: "/vitaminas/ComplexoB.png",
+      descricao: "Complexo de vitaminas do grupo B para energia e sistema nervoso.",
+      preco: "R$ 28,90",
+      precoAntigo: "",
+      quantidade: 38,
+      promocao: false,
+      desconto: 0,
+      tipo: "Suplementos",
+      categoria: "Vitaminas",
+      palavrasChave: ["complexo b", "vitamina b", "energia", "nervoso", "metabolismo"]
+    },
+    {
+      nome: "Vitamina C 1000mg",
+      imagem: "/vitaminas/VitaminaC.png",
+      descricao: "Poderoso antioxidante para fortalecimento da imunidade.",
+      preco: "R$ 24,90",
+      precoAntigo: "R$ 31,90",
+      quantidade: 52,
+      promocao: true,
+      desconto: 22,
+      tipo: "Suplementos",
+      categoria: "Vitaminas",
+      palavrasChave: ["vitamina c", "imunidade", "antioxidante", "gripe", "resfriado"]
+    },
+    {
+      nome: "Ômega 3 1000mg",
+      imagem: "/vitaminas/Omega3.png",
+      descricao: "Suplemento de ácidos graxos essenciais para saúde cardiovascular.",
+      preco: "R$ 45,90",
+      precoAntigo: "",
+      quantidade: 28,
+      promocao: false,
+      desconto: 0,
+      tipo: "Suplementos",
+      categoria: "Vitaminas",
+      palavrasChave: ["omega 3", "cardiovascular", "coracao", "colesterol", "cerebro"]
+    },
+    {
+      nome: "Ferro Quelato",
+      imagem: "/vitaminas/FerroQuelato.png",
+      descricao: "Suplemento de ferro para tratamento e prevenção de anemia.",
+      preco: "R$ 32,90",
+      precoAntigo: "R$ 38,90",
+      quantidade: 26,
+      promocao: true,
+      desconto: 15,
+      tipo: "Suplementos",
+      categoria: "Vitaminas",
+      palavrasChave: ["ferro", "anemia", "sangue", "cansaço", "energia"]
+    },
+    {
+      nome: "Magnésio Dimalato",
+      imagem: "/vitaminas/MagnesioDimalato.png",
+      descricao: "Suplemento de magnésio para músculos e sistema nervoso.",
+      preco: "R$ 39,90",
+      precoAntigo: "",
+      quantidade: 31,
+      promocao: false,
+      desconto: 0,
+      tipo: "Suplementos",
+      categoria: "Vitaminas",
+      palavrasChave: ["magnesio", "musculos", "caibras", "sono", "relaxante"]
+    },
+
+    {
+      nome: "Vitamina AD Gotas",
+      imagem: "/vitaminas/VitaminaAD.png",
+      descricao: "Suplemento vitamínico AD para desenvolvimento infantil.",
+      preco: "R$ 18,90",
+      precoAntigo: "",
+      quantidade: 42,
+      promocao: false,
+      desconto: 0,
+      tipo: "Suplementos",
+      categoria: "Vitaminas",
+      palavrasChave: ["vitamina ad", "gotas", "desenvolvimento", "ossos", "visao"]
+    },
+    // ========== PRODUTOS INFANTIS ==========
+    {
+      nome: "Paracetamol Infantil Gotas",
+      imagem: "/ProdutosInfantis/ParacetamolInfantil.png", 
+      descricao: "Analgésico e antitérmico infantil em gotas, sabor morango.",
+      preco: "R$ 12,90",
+      precoAntigo: "",
+      quantidade: 35,
+      promocao: false,
+      desconto: 0,
+      tipo: "Infantil", 
+      categoria: "Infantil",
+      palavrasChave: ["paracetamol infantil", "gotas", "febre", "dor", "crianca", "bebe"]
+    },
+
+    {
+      nome: "Polivitamínico Infantil",
+      imagem: "/ProdutosInfantis/PolivitaminicoInfantil.png",
+      descricao: "Complexo vitamínico completo para crianças, sabor uva.",
+      preco: "R$ 26,90",
+      precoAntigo: "R$ 32,90",
+      quantidade: 19,
+      promocao: true,
+      desconto: 18,
+      tipo: "Infantil",
+      categoria: "Infantil",
+      palavrasChave: ["polivitaminico", "vitaminas", "crescimento", "desenvolvimento", "crianca"]
+    },
+
+    // ========== PRODUTOS DE HIGIENE ==========
+    {
+      nome: "Sabonete Antisséptico",
+      imagem: "/higiene/SaboneteAntisseptico.png",
+      descricao: "Sabonete líquido antisséptico para higiene das mãos.",
+      preco: "R$ 15,90",
+      precoAntigo: "",
+      quantidade: 48,
+      promocao: false,
+      desconto: 0,
+      tipo: "Higiene",
+      categoria: "Higiene",
+      palavrasChave: ["sabonete", "antisseptico", "maos", "limpeza", "bacterias"]
+    },
+    {
+      nome: "Álcool em Gel 70%",
+      imagem: "/higiene/AlcoolGel.png",
+      descricao: "Álcool em gel 70% para higienização das mãos.",
+      preco: "R$ 12,90",
+      precoAntigo: "R$ 16,90",
+      quantidade: 72,
+      promocao: true,
+      desconto: 24,
+      tipo: "Higiene",
+      categoria: "Higiene",
+      palavrasChave: ["alcool gel", "higienizacao", "maos", "70%", "antisseptico"]
+    },
+    {
+      nome: "Lenços Umedecidos",
+      imagem: "/higiene/LencosUmedecidos.png",
+      descricao: "Lenços umedecidos antibacterianos com 100 unidades.",
+      preco: "R$ 9,90",
+      precoAntigo: "",
+      quantidade: 35,
+      promocao: false,
+      desconto: 0,
+      tipo: "Higiene",
+      categoria: "Higiene",
+      palavrasChave: ["lencos umedecidos", "antibacteriano", "limpeza", "pratico"]
+    },
+    {
+      nome: "Shampoo Anticaspa",
+      imagem: "/higiene/ShampooAnticaspa.png",
+      descricao: "Shampoo medicinal anticaspa com sulfeto de selênio.",
+      preco: "R$ 22,90",
+      precoAntigo: "R$ 28,90",
+      quantidade: 24,
+      promocao: true,
+      desconto: 21,
+      tipo: "Higiene",
+      categoria: "Higiene",
+      palavrasChave: ["shampoo", "anticaspa", "cabelo", "dermatite", "couro cabeludo"]
+    },
+    {
+      nome: "Sabonete Íntimo Feminino",
+      imagem: "/higiene/SaboneteIntimo.png",
+      descricao: "Sabonete líquido para higiene íntima feminina pH balanceado.",
+      preco: "R$ 18,90",
+      precoAntigo: "",
+      quantidade: 31,
+      promocao: false,
+      desconto: 0,
+      tipo: "Higiene",
+      categoria: "Higiene",
+      palavrasChave: ["sabonete intimo", "feminino", "ph", "higiene", "mulher"]
+    },
+
+    // ========== COSMÉTICOS ==========
+    {
+      nome: "Protetor Solar FPS 60",
+      imagem: "/cosmeticos/ProtetorSolar.png",
+      descricao: "Protetor solar facial FPS 60 com base aquosa.",
+      preco: "R$ 45,90",
+      precoAntigo: "R$ 55,90",
+      quantidade: 28,
+      promocao: true,
+      desconto: 18,
+      tipo: "Cosméticos",
+      categoria: "Cosméticos",
+      palavrasChave: ["protetor solar", "fps 60", "facial", "sol", "protecao"]
+    },
+    {
+      nome: "Hidratante Corporal",
+      imagem: "/cosmeticos/HidratanteCorporal.png",
+      descricao: "Loção hidratante corporal com ureia para pele seca.",
+      preco: "R$ 32,90",
+      precoAntigo: "",
+      quantidade: 22,
+      promocao: false,
+      desconto: 0,
+      tipo: "Cosméticos",
+      categoria: "Cosméticos",
+      palavrasChave: ["hidratante", "corporal", "pele seca", "ureia", "hidratacao"]
+    },
+    {
+      nome: "Sérum Vitamina C",
+      imagem: "/cosmeticos/SerumVitaminaC.png",
+      descricao: "Sérum facial antioxidante com vitamina C pura 15%.",
+      preco: "R$ 68,90",
+      precoAntigo: "R$ 85,90",
+      quantidade: 15,
+      promocao: true,
+      desconto: 20,
+      tipo: "Cosméticos",
+      categoria: "Cosméticos",
+      palavrasChave: ["serum", "vitamina c", "facial", "antioxidante", "anti-idade"]
+    },
+    {
+      nome: "Base Líquida FPS 30",
+      imagem: "/cosmeticos/BaseLiquida.png",
+      descricao: "Base líquida com proteção solar FPS 30, cobertura natural.",
+      preco: "R$ 39,90",
+      precoAntigo: "",
+      quantidade: 18,
+      promocao: false,
+      desconto: 0,
+      tipo: "Cosméticos",
+      categoria: "Cosméticos",
+      palavrasChave: ["base liquida", "fps 30", "maquiagem", "cobertura", "protetor"]
+    },
+    {
+      nome: "Máscara Facial Hidratante",
+      imagem: "/cosmeticos/MascaraFacial.png",
+      descricao: "Máscara facial hidratante com ácido hialurônico.",
+      preco: "R$ 25,90",
+      precoAntigo: "R$ 32,90",
+      quantidade: 33,
+      promocao: true,
+      desconto: 21,
+      tipo: "Cosméticos",
+      categoria: "Cosméticos",
+      palavrasChave: ["mascara facial", "hidratante", "acido hialuronico", "skincare"]
+    },
+
+    // Bucal
+    {
+      nome: "Enxaguante Bucal Antisséptico",
+      imagem: "/bucal/EnxaguanteBucal.png",
+      descricao: "Enxaguante bucal antisséptico sem álcool, 500ml.",
+      preco: "R$ 16,90",
+      precoAntigo: "",
+      quantidade: 42,
+      promocao: false,
+      desconto: 0,
+      tipo: "Bucal",
+      categoria: "Bucal",
+      palavrasChave: ["enxaguante", "bucal", "antisseptico", "halitose", "gengivite"]
+    },
+    {
+      nome: "Creme Dental Branqueador",
+      imagem: "/bucal/CremeDental.png",
+      descricao: "Creme dental branqueador com flúor e bicarbonato.",
+      preco: "R$ 8,90",
+      precoAntigo: "R$ 11,90",
+      quantidade: 58,
       promocao: true,
       desconto: 25,
-      tipo: "Referência",
-      palavrasChave: ["lorazepam", "ansiedade", "insonia", "calmante", "benzodiazepina"]
+      tipo: "Bucal",
+      categoria: "Bucal",
+      palavrasChave: ["creme dental", "branqueador", "fluor", "bicarbonato", "dentes"]
     },
     {
-      nome: "Prednisona 20mg",
-      imagem: "/Prednisona.png",
-      descricao: "Corticosteroide para tratamento de inflamações e alergias.",
-      preco: "R$ 23,90",
+      nome: "Fio Dental com Flúor",
+      imagem: "/bucal/FioDental.png",
+      descricao: "Fio dental encerado com flúor para limpeza interdental.",
+      preco: "R$ 6,90",
       precoAntigo: "",
-      quantidade: 3,
+      quantidade: 67,
       promocao: false,
       desconto: 0,
-      tipo: "Referência",
-      palavrasChave: ["prednisona", "corticoide", "inflamacao", "alergia", "anti-inflamatorio"]
+      tipo: "Bucal",
+      categoria: "Bucal",
+      palavrasChave: ["fio dental", "fluor", "limpeza", "interdental", "higiene"]
     },
     {
-      nome: "Furosemida 40mg",
-      imagem: "/Furosemida.png",
-      descricao: "Diurético para tratamento de retenção de líquidos e hipertensão.",
-      preco: "R$ 14,50",
+      nome: "Spray Antisséptico Oral",
+      imagem: "/bucal/SprayOral.png",
+      descricao: "Spray antisséptico oral para hálito fresco instantâneo.",
+      preco: "R$ 12,90",
       precoAntigo: "",
-      quantidade: 19,
+      quantidade: 29,
       promocao: false,
       desconto: 0,
-      tipo: "Genéricos",
-      palavrasChave: ["furosemida", "diuretico", "inchaço", "retencao", "liquido"]
+      tipo: "Bucal",
+      categoria: "Bucal",
+      palavrasChave: ["spray oral", "antisseptico", "halito", "fresco", "portatil"]
+    },
+    {
+      nome: "Gel Dental Sensibilidade",
+      imagem: "/bucal/GelDental.png",
+      descricao: "Gel dental para dentes sensíveis com nitrato de potássio.",
+      preco: "R$ 14,90",
+      precoAntigo: "R$ 18,90",
+      quantidade: 21,
+      promocao: true,
+      desconto: 21,
+      tipo: "Bucal",
+      categoria: "Bucal",
+      palavrasChave: ["gel dental", "sensibilidade", "dentes sensiveis", "nitrato potassio"]
     }
   ];
 
   get produtosFiltrados() {
     let produtosFiltradosPorTipo = this.produtos;
     
+    if (this.categoriaAtiva !== 'Todos') {
+      produtosFiltradosPorTipo = this.produtos.filter(produto => produto.categoria === this.categoriaAtiva);
+    }
 
     if (this.filtroAtivo !== 'Todos') {
-      produtosFiltradosPorTipo = this.produtos.filter(produto => produto.tipo === this.filtroAtivo);
+      produtosFiltradosPorTipo = produtosFiltradosPorTipo.filter(produto => produto.tipo === this.filtroAtivo);
     }
     
-
     if (this.termoPesquisa.trim() === '') {
       return produtosFiltradosPorTipo;
     }
@@ -266,12 +537,8 @@ export class MedicamentosComponent {
     const termo = this.termoPesquisa.toLowerCase().trim();
     
     return produtosFiltradosPorTipo.filter(produto => {
-    
       const nomeMatch = produto.nome.toLowerCase().includes(termo);
-   
       const descricaoMatch = produto.descricao.toLowerCase().includes(termo);
-      
-    
       const palavrasChaveMatch = produto.palavrasChave.some(palavra => 
         palavra.toLowerCase().includes(termo)
       );
@@ -282,6 +549,35 @@ export class MedicamentosComponent {
 
   get contadorCarrinho(): number {
     return this.carrinho.reduce((acc, item) => acc + item.quantidade, 0);
+  }
+
+  filtrarPorCategoria(categoria: string) {
+    this.categoriaAtiva = categoria;
+    this.filtroAtivo = 'Todos';
+    this.termoPesquisa = '';
+    
+    setTimeout(() => {
+      const secaoProdutos = document.getElementById('secao-produtos');
+      if (secaoProdutos) {
+        secaoProdutos.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start',
+          inline: 'nearest'
+        });
+      }
+    }, 100);
+    
+    if (categoria === 'Todos') {
+      this.toastr.info('Mostrando todos os produtos', 'Filtro', {
+        timeOut: 2000,
+        progressBar: true
+      });
+    } else {
+      this.toastr.info(`Filtrando por categoria: ${categoria}`, 'Categoria', {
+        timeOut: 2000,
+        progressBar: true
+      });
+    }
   }
 
   filtrarProdutos(tipo: string) {
@@ -295,6 +591,17 @@ export class MedicamentosComponent {
   limparPesquisa() {
     this.termoPesquisa = '';
     this.toastr.info('Pesquisa limpa', 'Busca', {
+      timeOut: 2000,
+      progressBar: true
+    });
+  }
+
+  limparTodosFiltros() {
+    this.categoriaAtiva = 'Todos';
+    this.filtroAtivo = 'Todos';
+    this.termoPesquisa = '';
+    
+    this.toastr.info('Todos os filtros foram limpos', 'Filtros', {
       timeOut: 2000,
       progressBar: true
     });
@@ -322,7 +629,6 @@ export class MedicamentosComponent {
       this.carrinho.push({ nome: produto, quantidade: 1 });
     }
     
-
     this.toastr.success(`${produto} adicionado ao carrinho!`, 'Sucesso!');
   }
 
@@ -350,13 +656,13 @@ export class MedicamentosComponent {
     this.modalAberto = false;
   }
 
-voltar() {
-  this.toastr.info('Retornando à página inicial', 'Navegação', {
-    timeOut: 2000,
-    progressBar: true
-  });
-  this.router.navigate(['/formulario']); 
-}
+  voltar() {
+    this.toastr.info('Retornando à página inicial', 'Navegação', {
+      timeOut: 2000,
+      progressBar: true
+    });
+    this.router.navigate(['/formulario']); 
+  }
 
   finalizarCompra() {
     if (this.carrinho.length === 0) {
@@ -372,7 +678,6 @@ voltar() {
       progressBar: true
     });
     
-
     setTimeout(() => {
       this.toastr.info('Obrigado pela preferência! Pedido em processamento', 'Sucesso', {
         timeOut: 5000,

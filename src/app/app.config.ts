@@ -2,11 +2,11 @@ import { ApplicationConfig } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
 import { provideRouter } from '@angular/router';
-import { routes } from './app.routes'; // Adicione esta linha
+import { routes } from './app.routes'; 
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes), // Mudança aqui: de provideRouter([]) para provideRouter(routes)
+    provideRouter(routes), 
     provideAnimations(),
     provideToastr({
       timeOut: 3000,
